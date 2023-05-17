@@ -1,0 +1,122 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false, // Menyembunyikan mark debug
+      home: SplashScreen(),
+    );
+  }
+}
+
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Menjalankan fungsi untuk delay dan pindah ke halaman berikutnya
+    navigateToNextScreen();
+  }
+
+  Future navigateToNextScreen() async {
+    // Delay time selama 2 detik (2000 milidetik)
+    await Future.delayed(Duration(milliseconds: 2000));
+    // Pindah ke halaman berikutnya (misalnya HomeScreen)
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => HomeScreen()),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/w4.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: const Center(
+          child: Text(
+            'My App',
+            style: TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              color: Colors.blueAccent,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// Homepage
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Home'),
+        actions: [
+          Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () {
+                  // Aksi yang dijalankan saat tombol pencarian ditekan
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.notification_add),
+                onPressed: () {
+                  // Aksi yang dijalankan saat tombol tambah ditekan
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.settings),
+                onPressed: () {
+                  // Aksi yang dijalankan saat tombol hapus ditekan
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('Home Screen'),
+            const SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: TextField(
+                decoration: const InputDecoration(
+                  hintText: 'Search...',
+                  border: OutlineInputBorder(),
+                ),
+                onChanged: (value) {
+                  // Aksi yang dijalankan saat nilai teks berubah
+                  // Anda dapat menambahkan logika pencarian di sini
+                  print('Search text changed: $value');
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
